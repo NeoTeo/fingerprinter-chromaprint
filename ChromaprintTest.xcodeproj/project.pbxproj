@@ -1,0 +1,460 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AB4637F01C41B9C200D6B49C /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB4637EF1C41B9C200D6B49C /* Accelerate.framework */; };
+		AB4637F61C41C19000D6B49C /* dummy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4637F51C41C19000D6B49C /* dummy.cpp */; };
+		ABBA51231C3EA3DD0065B0B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBA51221C3EA3DD0065B0B5 /* AppDelegate.swift */; };
+		ABBA51251C3EA3DD0065B0B5 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBA51241C3EA3DD0065B0B5 /* Document.swift */; };
+		ABBA51281C3EA3DD0065B0B5 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABBA51261C3EA3DD0065B0B5 /* Document.xib */; };
+		ABBA512A1C3EA3DD0065B0B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABBA51291C3EA3DD0065B0B5 /* Assets.xcassets */; };
+		ABBA512D1C3EA3DD0065B0B5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABBA512B1C3EA3DD0065B0B5 /* MainMenu.xib */; };
+		ABBA51381C3EA3DD0065B0B5 /* ChromaprintTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBA51371C3EA3DD0065B0B5 /* ChromaprintTestTests.swift */; };
+		ABE34E6C1C41B81400AA716A /* libchromaprint.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE34E6B1C41B81400AA716A /* libchromaprint.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ABBA51341C3EA3DD0065B0B5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ABBA51171C3EA3DD0065B0B5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ABBA511E1C3EA3DD0065B0B5;
+			remoteInfo = ChromaprintTest;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		ABBA51451C3EACC30065B0B5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		AB4637EF1C41B9C200D6B49C /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		AB4637F51C41C19000D6B49C /* dummy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dummy.cpp; sourceTree = "<group>"; };
+		ABBA511F1C3EA3DD0065B0B5 /* ChromaprintTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChromaprintTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABBA51221C3EA3DD0065B0B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		ABBA51241C3EA3DD0065B0B5 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		ABBA51271C3EA3DD0065B0B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Document.xib; sourceTree = "<group>"; };
+		ABBA51291C3EA3DD0065B0B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ABBA512C1C3EA3DD0065B0B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		ABBA512E1C3EA3DD0065B0B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABBA51331C3EA3DD0065B0B5 /* ChromaprintTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChromaprintTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABBA51371C3EA3DD0065B0B5 /* ChromaprintTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChromaprintTestTests.swift; sourceTree = "<group>"; };
+		ABBA51391C3EA3DD0065B0B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABBA514C1C3ED8C20065B0B5 /* ChromaprintTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ChromaprintTest-Bridging-Header.h"; sourceTree = "<group>"; };
+		ABE34E6B1C41B81400AA716A /* libchromaprint.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libchromaprint.a; path = ChromaprintLib/libchromaprint.a; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ABBA511C1C3EA3DD0065B0B5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB4637F01C41B9C200D6B49C /* Accelerate.framework in Frameworks */,
+				ABE34E6C1C41B81400AA716A /* libchromaprint.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABBA51301C3EA3DD0065B0B5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ABBA51161C3EA3DD0065B0B5 = {
+			isa = PBXGroup;
+			children = (
+				AB4637EF1C41B9C200D6B49C /* Accelerate.framework */,
+				ABE34E6B1C41B81400AA716A /* libchromaprint.a */,
+				ABBA51211C3EA3DD0065B0B5 /* ChromaprintTest */,
+				ABBA51361C3EA3DD0065B0B5 /* ChromaprintTestTests */,
+				ABBA51201C3EA3DD0065B0B5 /* Products */,
+				ABBA514C1C3ED8C20065B0B5 /* ChromaprintTest-Bridging-Header.h */,
+			);
+			sourceTree = "<group>";
+		};
+		ABBA51201C3EA3DD0065B0B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ABBA511F1C3EA3DD0065B0B5 /* ChromaprintTest.app */,
+				ABBA51331C3EA3DD0065B0B5 /* ChromaprintTestTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ABBA51211C3EA3DD0065B0B5 /* ChromaprintTest */ = {
+			isa = PBXGroup;
+			children = (
+				ABBA51221C3EA3DD0065B0B5 /* AppDelegate.swift */,
+				ABBA51241C3EA3DD0065B0B5 /* Document.swift */,
+				ABBA51261C3EA3DD0065B0B5 /* Document.xib */,
+				ABBA51291C3EA3DD0065B0B5 /* Assets.xcassets */,
+				ABBA512B1C3EA3DD0065B0B5 /* MainMenu.xib */,
+				ABBA512E1C3EA3DD0065B0B5 /* Info.plist */,
+				AB4637F51C41C19000D6B49C /* dummy.cpp */,
+			);
+			path = ChromaprintTest;
+			sourceTree = "<group>";
+		};
+		ABBA51361C3EA3DD0065B0B5 /* ChromaprintTestTests */ = {
+			isa = PBXGroup;
+			children = (
+				ABBA51371C3EA3DD0065B0B5 /* ChromaprintTestTests.swift */,
+				ABBA51391C3EA3DD0065B0B5 /* Info.plist */,
+			);
+			path = ChromaprintTestTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ABBA511E1C3EA3DD0065B0B5 /* ChromaprintTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABBA513C1C3EA3DD0065B0B5 /* Build configuration list for PBXNativeTarget "ChromaprintTest" */;
+			buildPhases = (
+				ABBA511B1C3EA3DD0065B0B5 /* Sources */,
+				ABBA511C1C3EA3DD0065B0B5 /* Frameworks */,
+				ABBA511D1C3EA3DD0065B0B5 /* Resources */,
+				ABBA51451C3EACC30065B0B5 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChromaprintTest;
+			productName = ChromaprintTest;
+			productReference = ABBA511F1C3EA3DD0065B0B5 /* ChromaprintTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ABBA51321C3EA3DD0065B0B5 /* ChromaprintTestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABBA513F1C3EA3DD0065B0B5 /* Build configuration list for PBXNativeTarget "ChromaprintTestTests" */;
+			buildPhases = (
+				ABBA512F1C3EA3DD0065B0B5 /* Sources */,
+				ABBA51301C3EA3DD0065B0B5 /* Frameworks */,
+				ABBA51311C3EA3DD0065B0B5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ABBA51351C3EA3DD0065B0B5 /* PBXTargetDependency */,
+			);
+			name = ChromaprintTestTests;
+			productName = ChromaprintTestTests;
+			productReference = ABBA51331C3EA3DD0065B0B5 /* ChromaprintTestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ABBA51171C3EA3DD0065B0B5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Terminal Glow";
+				TargetAttributes = {
+					ABBA511E1C3EA3DD0065B0B5 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					ABBA51321C3EA3DD0065B0B5 = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = ABBA511E1C3EA3DD0065B0B5;
+					};
+				};
+			};
+			buildConfigurationList = ABBA511A1C3EA3DD0065B0B5 /* Build configuration list for PBXProject "ChromaprintTest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ABBA51161C3EA3DD0065B0B5;
+			productRefGroup = ABBA51201C3EA3DD0065B0B5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ABBA511E1C3EA3DD0065B0B5 /* ChromaprintTest */,
+				ABBA51321C3EA3DD0065B0B5 /* ChromaprintTestTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ABBA511D1C3EA3DD0065B0B5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABBA512A1C3EA3DD0065B0B5 /* Assets.xcassets in Resources */,
+				ABBA51281C3EA3DD0065B0B5 /* Document.xib in Resources */,
+				ABBA512D1C3EA3DD0065B0B5 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABBA51311C3EA3DD0065B0B5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ABBA511B1C3EA3DD0065B0B5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABBA51251C3EA3DD0065B0B5 /* Document.swift in Sources */,
+				AB4637F61C41C19000D6B49C /* dummy.cpp in Sources */,
+				ABBA51231C3EA3DD0065B0B5 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABBA512F1C3EA3DD0065B0B5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABBA51381C3EA3DD0065B0B5 /* ChromaprintTestTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ABBA51351C3EA3DD0065B0B5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ABBA511E1C3EA3DD0065B0B5 /* ChromaprintTest */;
+			targetProxy = ABBA51341C3EA3DD0065B0B5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		ABBA51261C3EA3DD0065B0B5 /* Document.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ABBA51271C3EA3DD0065B0B5 /* Base */,
+			);
+			name = Document.xib;
+			sourceTree = "<group>";
+		};
+		ABBA512B1C3EA3DD0065B0B5 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ABBA512C1C3EA3DD0065B0B5 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ABBA513A1C3EA3DD0065B0B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ChromaprintLib";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ChromaprintLib";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/ChromaprintLib";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ABBA513B1C3EA3DD0065B0B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ChromaprintLib";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ChromaprintLib";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/ChromaprintLib";
+			};
+			name = Release;
+		};
+		ABBA513D1C3EA3DD0065B0B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_VERSION = "";
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = ChromaprintTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ChromaprintLib",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = TerminalGlow.ChromaprintTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ChromaprintTest-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ABBA513E1C3EA3DD0065B0B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_VERSION = "";
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = ChromaprintTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ChromaprintLib",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = TerminalGlow.ChromaprintTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ChromaprintTest-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		ABBA51401C3EA3DD0065B0B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ChromaprintTestTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = TerminalGlow.ChromaprintTestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChromaprintTest.app/Contents/MacOS/ChromaprintTest";
+			};
+			name = Debug;
+		};
+		ABBA51411C3EA3DD0065B0B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ChromaprintTestTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = TerminalGlow.ChromaprintTestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChromaprintTest.app/Contents/MacOS/ChromaprintTest";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ABBA511A1C3EA3DD0065B0B5 /* Build configuration list for PBXProject "ChromaprintTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABBA513A1C3EA3DD0065B0B5 /* Debug */,
+				ABBA513B1C3EA3DD0065B0B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABBA513C1C3EA3DD0065B0B5 /* Build configuration list for PBXNativeTarget "ChromaprintTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABBA513D1C3EA3DD0065B0B5 /* Debug */,
+				ABBA513E1C3EA3DD0065B0B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABBA513F1C3EA3DD0065B0B5 /* Build configuration list for PBXNativeTarget "ChromaprintTestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABBA51401C3EA3DD0065B0B5 /* Debug */,
+				ABBA51411C3EA3DD0065B0B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ABBA51171C3EA3DD0065B0B5 /* Project object */;
+}
