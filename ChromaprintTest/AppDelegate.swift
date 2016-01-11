@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import AVFoundation
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -33,7 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let chromaprintContext = chromaprint_new(algo)
 
         /// Get the song
-        let songUrl = NSURL(fileURLWithPath: "file://Users/teo/Desktop/64.mp3")
+        let songUrl = NSURL(fileURLWithPath: "/Users/teo/Desktop/64.mp3" )
 
         /// Decode the song
         let duration = decodeAudio(songUrl, withMaxLength: maxLength, forContext: chromaprintContext)
@@ -58,6 +59,42 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         withMaxLength maxLength: Int ,
         forContext context: UnsafeMutablePointer<ChromaprintContext>) -> Int {
         
+            let asset = AVURLAsset(URL: fromUrl)
+            let reader = try! AVAssetReader(asset: asset)
+            let audioTracks = asset.tracksWithMediaType(AVMediaTypeAudio)
+            if audioTracks.count == 0 {
+                print("Error: No audio tracks found")
+                return 0
+            }
+            let outputSettings: [String:Int] =
+                [   AVFormatIDKey: Int(kAudioFormatLinearPCM),
+                    AVLinearPCMIsBigEndianKey: 0,
+                    AVLinearPCMIsFloatKey: 0,
+                    AVLinearPCMBitDepthKey: 16,
+                    AVLinearPCMIsNonInterleaved: 0]
+            
+            let audioTrack = audioTracks[0]
+            let trackOutput = AVAssetReaderTrackOutput(track: audioTrack, outputSettings: outputSettings)
+            
+            reader.addOutput(trackOutput)
+            reader.startReading()
+            
+            let sampleData = NSMutableData()
+            
+            while reader.status == AVAssetReaderStatus.Reading {
+                if let sampleBufferRef = trackOutput.copyNextSampleBuffer() {
+                    if let blockBufferRef = CMSampleBufferGetDataBuffer(sampleBufferRef) {
+                        let bufferLength = CMBlockBufferGetDataLength(blockBufferRef)
+                        let data = NSMutableData(length: bufferLength)
+                        CMBlockBufferCopyDataBytes(blockBufferRef, 0, bufferLength, data!.mutableBytes)
+                        let samples = UnsafeMutablePointer<Int16>(data!.mutableBytes)
+                        sampleData.appendBytes(samples, length: bufferLength)
+                        CMSampleBufferInvalidate(sampleBufferRef)
+                    }
+                }
+            }
+            print("The outputs \(sampleData)")
+            
         return 42
     }
     
