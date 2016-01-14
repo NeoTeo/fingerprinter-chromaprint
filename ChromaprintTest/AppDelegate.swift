@@ -14,8 +14,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     let desktopPath = "/Users/teo/Desktop/"
 //    let fileName = "64.mp3"
-    let fileName = "low.wav"
-
+//    let fileName = "low.wav"
+//    let fileName = "64.wav"
+        let fileName = "small64.m4a"
+    
     func applicationDidFinishLaunching(aNotification: NSNotification) {
 
         let maxLength = 120
@@ -162,9 +164,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                         *  - size: size of the data buffer (in samples)
                         */
                         let bufLen = Int32(bufferLength)
-                        chromaprint_feed(context, UnsafeMutablePointer<Void>(samples),bufLen)
+                        chromaprint_feed(context, UnsafeMutablePointer<Void>(samples),bufLen>>1)
                         
-                        
+                        print("Buffer length \(bufferLength)")
                         sampleData.appendBytes(samples, length: bufferLength)
                         CMSampleBufferInvalidate(sampleBufferRef)
                     }
