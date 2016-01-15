@@ -82,7 +82,6 @@
 		ABBA51161C3EA3DD0065B0B5 = {
 			isa = PBXGroup;
 			children = (
-				AB66572D1C49540E00F9B845 /* Fingerprinter.swift */,
 				AB4637EF1C41B9C200D6B49C /* Accelerate.framework */,
 				ABE34E6B1C41B81400AA716A /* libchromaprint.a */,
 				ABBA51211C3EA3DD0065B0B5 /* ChromaprintTest */,
@@ -104,6 +103,7 @@
 		ABBA51211C3EA3DD0065B0B5 /* ChromaprintTest */ = {
 			isa = PBXGroup;
 			children = (
+				AB66572D1C49540E00F9B845 /* Fingerprinter.swift */,
 				ABBA51221C3EA3DD0065B0B5 /* AppDelegate.swift */,
 				ABBA51241C3EA3DD0065B0B5 /* Document.swift */,
 				ABBA51261C3EA3DD0065B0B5 /* Document.xib */,
