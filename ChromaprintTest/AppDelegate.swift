@@ -13,39 +13,38 @@ import AVFoundation
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     let desktopPath = "/Users/teo/Desktop/"
-//    let fileName = "64.mp3"
+    let fileName = "64.mp3"
 //    let fileName = "low.wav"
-    let fileName = "64.wav"
+//    let fileName = "64.wav"
 //        let fileName = "small64.m4a"
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
 
-        let maxLength = 1200
+        /// Set the maximum number of seconds we're going to use for fingerprinting
+        let maxLength = 120
+        
         /** Create a single instance of an unsafe mutable Int8 pointer so we can 
             pass it to chromaprint_get_fingerprint without errors. 
-            The defer ensures it is not leaked.
+            The defer ensures it is not leaked if we drop out early.
         */
         var fingerprint = UnsafeMutablePointer<Int8>.alloc(1)
         defer {
-            print("Destroy & dealloc fingerprint")
             fingerprint.destroy()
             fingerprint.dealloc(1)
         }
         
         /// Start by creating a chromaprint context.
         /// Not sure why CHROMAPRINT_ALGORITHM_DEFAULT isn't defined here.
-//        let algo : Int32 = 1 //UInt32(CHROMAPRINT_ALGORITHM_TEST2.rawValue)
         let algo = Int32(CHROMAPRINT_ALGORITHM_TEST2.rawValue)
         let chromaprintContext = chromaprint_new(algo)
-
-        /// Get the song
-//        let fileName = "low.wav"
-
-//        let songUrl = NSURL(fileURLWithPath: "/Users/teo/Desktop/64.mp3" )
+        
+        /// Build the song path
         let songUrl = NSURL(fileURLWithPath: desktopPath+fileName )
         
-        /// Decode the song
+        /// Decode the song and get back its duration. 
+        /// The chromaprintContext will contain the fingerprint.
         let duration = decodeAudio(songUrl, withMaxLength: maxLength, forContext: chromaprintContext)
+        
         /** Make a fingerprint from the song data.
             (Note we can also get a hash back with chromprint_get_fingerprint_hash)
         */
@@ -75,6 +74,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 print("Error: No audio tracks found")
                 return 0
             }
+            
             let outputSettings: [String:Int] =
                 [   AVFormatIDKey: Int(kAudioFormatLinearPCM),
                     AVLinearPCMIsBigEndianKey: 0,                   /// little endian
@@ -85,14 +85,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let audioTrack = audioTracks[0]
             let trackOutput = AVAssetReaderTrackOutput(track: audioTrack, outputSettings: outputSettings)
 
-            /// Set the duration
+            /// Get the duration.
             let durationInSeconds = CMTimeGetSeconds(audioTrack.timeRange.duration)
 
             var sampleRate : Int32?
             var sampleChannels : Int32?
-            
-//            print("Format descriptions \(audioTrack.formatDescriptions)")
             let descriptions = audioTrack.formatDescriptions
+            
             for d in 0..<descriptions.count {
                 let item = descriptions[d] as! CMAudioFormatDescriptionRef
                 let desc = CMAudioFormatDescriptionGetStreamBasicDescription(item).memory
@@ -104,6 +103,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     sampleChannels = Int32(desc.mChannelsPerFrame)
                 }
             }
+
             /// Sanity check
             guard (sampleRate != nil) && (sampleChannels != nil) else {
                 return 0
@@ -122,6 +122,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     max length * sample channels * sample rate
              */
             var remainingSamples = Int32(maxLength) * sampleChannels! * sampleRate!
+            
             /// start off chromaprint
             chromaprint_start(context, sampleRate!, sampleChannels!)
             
