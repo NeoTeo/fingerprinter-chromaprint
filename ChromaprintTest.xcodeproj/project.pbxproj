@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AB4637F01C41B9C200D6B49C /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB4637EF1C41B9C200D6B49C /* Accelerate.framework */; };
 		AB4637F61C41C19000D6B49C /* dummy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4637F51C41C19000D6B49C /* dummy.cpp */; };
+		AB66572E1C49540E00F9B845 /* Fingerprinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66572D1C49540E00F9B845 /* Fingerprinter.swift */; };
 		ABBA51231C3EA3DD0065B0B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBA51221C3EA3DD0065B0B5 /* AppDelegate.swift */; };
 		ABBA51251C3EA3DD0065B0B5 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBA51241C3EA3DD0065B0B5 /* Document.swift */; };
 		ABBA51281C3EA3DD0065B0B5 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABBA51261C3EA3DD0065B0B5 /* Document.xib */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		AB4637EF1C41B9C200D6B49C /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		AB4637F51C41C19000D6B49C /* dummy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dummy.cpp; sourceTree = "<group>"; };
+		AB66572D1C49540E00F9B845 /* Fingerprinter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fingerprinter.swift; sourceTree = "<group>"; };
 		ABBA511F1C3EA3DD0065B0B5 /* ChromaprintTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChromaprintTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABBA51221C3EA3DD0065B0B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ABBA51241C3EA3DD0065B0B5 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		ABBA51161C3EA3DD0065B0B5 = {
 			isa = PBXGroup;
 			children = (
+				AB66572D1C49540E00F9B845 /* Fingerprinter.swift */,
 				AB4637EF1C41B9C200D6B49C /* Accelerate.framework */,
 				ABE34E6B1C41B81400AA716A /* libchromaprint.a */,
 				ABBA51211C3EA3DD0065B0B5 /* ChromaprintTest */,
@@ -224,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABBA51251C3EA3DD0065B0B5 /* Document.swift in Sources */,
+				AB66572E1C49540E00F9B845 /* Fingerprinter.swift in Sources */,
 				AB4637F61C41C19000D6B49C /* dummy.cpp in Sources */,
 				ABBA51231C3EA3DD0065B0B5 /* AppDelegate.swift in Sources */,
 			);
