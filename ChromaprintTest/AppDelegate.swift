@@ -15,12 +15,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let desktopPath = "/Users/teo/Desktop/"
 //    let fileName = "64.mp3"
 //    let fileName = "low.wav"
-//    let fileName = "64.wav"
-        let fileName = "small64.m4a"
+    let fileName = "64.wav"
+//        let fileName = "small64.m4a"
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
 
-        let maxLength = 120
+        let maxLength = 1200
         /** Create a single instance of an unsafe mutable Int8 pointer so we can 
             pass it to chromaprint_get_fingerprint without errors. 
             The defer ensures it is not leaked.
@@ -65,11 +65,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func decodeAudio(
         fromUrl: NSURL,
         withMaxLength maxLength: Int ,
-        forContext context: UnsafeMutablePointer<ChromaprintContext>) -> Int {
+        forContext context: UnsafeMutablePointer<ChromaprintContext>) -> Double {
         
             let asset = AVURLAsset(URL: fromUrl)
             let reader = try! AVAssetReader(asset: asset)
             let audioTracks = asset.tracksWithMediaType(AVMediaTypeAudio)
+            
             if audioTracks.count == 0 {
                 print("Error: No audio tracks found")
                 return 0
@@ -84,10 +85,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let audioTrack = audioTracks[0]
             let trackOutput = AVAssetReaderTrackOutput(track: audioTrack, outputSettings: outputSettings)
 
+            /// Set the duration
+            let durationInSeconds = CMTimeGetSeconds(audioTrack.timeRange.duration)
+
             var sampleRate : Int32?
             var sampleChannels : Int32?
             
-            print("Format descriptions \(audioTrack.formatDescriptions)")
+//            print("Format descriptions \(audioTrack.formatDescriptions)")
             let descriptions = audioTrack.formatDescriptions
             for d in 0..<descriptions.count {
                 let item = descriptions[d] as! CMAudioFormatDescriptionRef
@@ -110,38 +114,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             let sampleData      = NSMutableData()
             var totalBuf: Int = 0
+            
+            /** Calculate remainingSamples as 
+                max length (in seconds) times number of samples read in a second.
+                Sample rate is the number of samples per second 
+                and since we have two channels our number is
+                    max length * sample channels * sample rate
+             */
+            var remainingSamples = Int32(maxLength) * sampleChannels! * sampleRate!
             /// start off chromaprint
             chromaprint_start(context, sampleRate!, sampleChannels!)
             
             while reader.status == AVAssetReaderStatus.Reading {
                 if let sampleBufferRef = trackOutput.copyNextSampleBuffer() {
                     if let blockBufferRef = CMSampleBufferGetDataBuffer(sampleBufferRef) {
-                        /**
-                        size_t lengthAtOffset;
-                        size_t totalLength;
-                        char* data;
-
-*/
-//                        var lengthAtOffset = 0
-//                        var totalLength = 0
-//                        var dataPointer = UnsafeMutablePointer<Int8>.alloc(1)
-//                        defer {
-//                            dataPointer.destroy()
-//                            dataPointer.dealloc(1)
-//                        }
-//
-//                        if CMBlockBufferGetDataPointer(blockBufferRef,
-//                            0,                  /// start from offset zero
-//                            &lengthAtOffset,    /// will be set to bytelength from above offset
-//                            &totalLength,       /// will be set to bytelength from offset 0
-//                            &dataPointer) == kCMBlockBufferNoErr {
-//                            print("Datapointer \(dataPointer), \(lengthAtOffset), \(totalLength)")
-//                                for idx in 0..<totalLength {
-//                                    print(String(format:"%X", dataPointer[idx]))
-//                                }
-//                        }
                         
                         /// bufferLength is the total number of bytes in the buffer
+                        /// Note that 16-bit samples are half that.
                         let bufferLength = CMBlockBufferGetDataLength(blockBufferRef)
                         totalBuf += bufferLength
                         
@@ -161,24 +150,41 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                         *  - ctx: Chromaprint context pointer
                         *  - data: raw audio data, should point to an array of 16-bit signed
                         *          integers in native byte-order
-                        *  - size: size of the data buffer (in samples)
+                        *  - size: size of the data buffer 
+                                (in samples, so divide by 2 - should use bitdepth val instead)
+                            sampleCount already accounts for both channels since it is calculated
+                            from the number of bytes read. 
+                            Each channel's sample count would be:
+                                bytes per channel = bytes read divided by two 
+                                samples per channel = bytes per channel divided by two (for 16-bit samples)
+                         
+                            a shortcut is bufferLength>>2
                         */
-                        let bufLen = Int32(bufferLength)
-                        chromaprint_feed(context, UnsafeMutablePointer<Void>(samples),bufLen>>1)
+                        let sampleCount = Int32(bufferLength>>1)
                         
-                        print("Buffer length \(bufferLength)")
+                        /// pick the smaller of the two values so we don't remove too much
+                        let length = min(remainingSamples, sampleCount)
+                        
+                        chromaprint_feed(context, UnsafeMutablePointer<Void>(samples),length)
+                        
                         sampleData.appendBytes(samples, length: bufferLength)
                         CMSampleBufferInvalidate(sampleBufferRef)
+                        
+                        /// Cut short if we've set a maxLength
+                        if maxLength != 0 {
+                            remainingSamples -= length
+                            if remainingSamples <= 0 {
+                                break
+                            }
+                        }
+                        
                     }
                 }
             }
-            print("total buf \(totalBuf)")
-            //print("The outputs \(sampleData)")
-            
-            sampleData.writeToFile(desktopPath+fileName+".raw", atomically: true)
+//            sampleData.writeToFile(desktopPath+fileName+".raw", atomically: true)
             
             chromaprint_finish(context)
-        return 42
+        return durationInSeconds
     }
     
     func applicationWillTerminate(aNotification: NSNotification) {
