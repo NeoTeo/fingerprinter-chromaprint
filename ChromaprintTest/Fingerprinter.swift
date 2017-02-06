@@ -27,12 +27,10 @@ func generateFingerprint(fromSongAtUrl songUrl : URL) -> (String, Double)? {
     /// Not sure why CHROMAPRINT_ALGORITHM_DEFAULT isn't defined here.
     let algo = Int32(CHROMAPRINT_ALGORITHM_TEST2.rawValue)
     guard let chromaprintContext = chromaprint_new(algo) else { return nil }
-    let opaquePtr = OpaquePointer(chromaprintContext)
-    let contextPtr = UnsafeMutablePointer<ChromaprintContext?>(opaquePtr)
+    
     /// Decode the song and get back its duration.
     /// The chromaprintContext will contain the fingerprint.
-//    let duration = decodeAudio(songUrl, withMaxLength: maxLength, forContext: chromaprintContext)
-    let duration = decodeAudio(songUrl, withMaxLength: maxLength, forContext: contextPtr)
+    let duration = decodeAudio(songUrl, withMaxLength: maxLength, forContext: chromaprintContext)
     
     /** Make a fingerprint from the song data.
     (Note we can also get a hash back with chromprint_get_fingerprint_hash)
@@ -53,7 +51,6 @@ func generateFingerprint(fromSongAtUrl songUrl : URL) -> (String, Double)? {
 private func decodeAudio(
     _ fromUrl: URL,
     withMaxLength maxLength: Int ,
-//    forContext context: UnsafeMutableRawPointer) -> Double {
     forContext context: UnsafeMutablePointer<ChromaprintContext?>) -> Double {
     
     
@@ -97,9 +94,6 @@ private func decodeAudio(
         
         /// Sanity check
         guard let rate = sampleRate, let channels = sampleChannels else { return 0 }
-//        guard (sampleRate != nil) && (sampleChannels != nil) else {
-//            return 0
-//        }
     
         reader.add(trackOutput)
         reader.startReading()
