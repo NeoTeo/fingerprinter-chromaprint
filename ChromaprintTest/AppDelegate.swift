@@ -18,10 +18,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //    let fileName = "64.wav"
 //        let fileName = "small64.m4a"
     
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
 
         /// Build the song path
-        let songUrl = NSURL(fileURLWithPath: desktopPath+fileName )
+        let songUrl = URL(fileURLWithPath: desktopPath+fileName )
         
         guard let (fingerprintString, duration) = generateFingerprint(fromSongAtUrl: songUrl) else {
             print("No fingerprint was generated")
@@ -34,7 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     
-    func applicationWillTerminate(aNotification: NSNotification) {
+    func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
 

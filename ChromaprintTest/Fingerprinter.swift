@@ -8,7 +8,7 @@
 
 import AVFoundation
 
-func generateFingerprint(fromSongAtUrl songUrl : NSURL) -> (String, Double)? {
+func generateFingerprint(fromSongAtUrl songUrl : URL) -> (String, Double)? {
     
     /// Set the maximum number of seconds we're going to use for fingerprinting
     let maxLength = 120
@@ -17,44 +17,49 @@ func generateFingerprint(fromSongAtUrl songUrl : NSURL) -> (String, Double)? {
      pass it to chromaprint_get_fingerprint without errors.
      The defer ensures it is not leaked if we drop out early.
      */
-    var fingerprint = UnsafeMutablePointer<Int8>.alloc(1)
+    var fingerprint: UnsafeMutablePointer<Int8>? = UnsafeMutablePointer<Int8>.allocate(capacity: 1)
     defer {
-        fingerprint.destroy()
-        fingerprint.dealloc(1)
+        fingerprint?.deinitialize()
+        fingerprint?.deallocate(capacity: 1)
     }
     
     /// Start by creating a chromaprint context.
     /// Not sure why CHROMAPRINT_ALGORITHM_DEFAULT isn't defined here.
     let algo = Int32(CHROMAPRINT_ALGORITHM_TEST2.rawValue)
-    let chromaprintContext = chromaprint_new(algo)
-    
+    guard let chromaprintContext = chromaprint_new(algo) else { return nil }
+    let opaquePtr = OpaquePointer(chromaprintContext)
+    let contextPtr = UnsafeMutablePointer<ChromaprintContext?>(opaquePtr)
     /// Decode the song and get back its duration.
     /// The chromaprintContext will contain the fingerprint.
-    let duration = decodeAudio(songUrl, withMaxLength: maxLength, forContext: chromaprintContext)
+//    let duration = decodeAudio(songUrl, withMaxLength: maxLength, forContext: chromaprintContext)
+    let duration = decodeAudio(songUrl, withMaxLength: maxLength, forContext: contextPtr)
     
     /** Make a fingerprint from the song data.
     (Note we can also get a hash back with chromprint_get_fingerprint_hash)
     */
+    
     if chromaprint_get_fingerprint(chromaprintContext, &fingerprint) == 0 {
         print("Error: could not get fingerprint")
         return nil
     }
     
-    let fingerprintString = NSString(CString: fingerprint, encoding: NSASCIIStringEncoding)
+    let fingerprintString = NSString(cString: fingerprint!, encoding: String.Encoding.ascii.rawValue)
     
     chromaprint_dealloc(chromaprintContext)
 
-    return (String(fingerprintString), duration)
+    return (String(describing: fingerprintString), duration)
 }
 
 private func decodeAudio(
-    fromUrl: NSURL,
+    _ fromUrl: URL,
     withMaxLength maxLength: Int ,
-    forContext context: UnsafeMutablePointer<ChromaprintContext>) -> Double {
-        
-        let asset = AVURLAsset(URL: fromUrl)
+//    forContext context: UnsafeMutableRawPointer) -> Double {
+    forContext context: UnsafeMutablePointer<ChromaprintContext?>) -> Double {
+    
+    
+        let asset = AVURLAsset(url: fromUrl)
         let reader = try! AVAssetReader(asset: asset)
-        let audioTracks = asset.tracksWithMediaType(AVMediaTypeAudio)
+        let audioTracks = asset.tracks(withMediaType: AVMediaTypeAudio)
         
         if audioTracks.count == 0 {
             print("Error: No audio tracks found")
@@ -79,23 +84,24 @@ private func decodeAudio(
         let descriptions = audioTrack.formatDescriptions
         
         for d in 0..<descriptions.count {
-            let item = descriptions[d] as! CMAudioFormatDescriptionRef
-            let desc = CMAudioFormatDescriptionGetStreamBasicDescription(item).memory
+            let item = descriptions[d] as! CMAudioFormatDescription
+            let desc = CMAudioFormatDescriptionGetStreamBasicDescription(item)?.pointee
             //print("so d is \(d) and desc.mSampleRate is \(desc.mSampleRate)")
-            if desc.mSampleRate != 0 {
-                sampleRate = Int32(desc.mSampleRate)
+            if desc?.mSampleRate != 0 {
+                sampleRate = Int32((desc?.mSampleRate)!)
             }
-            if desc.mChannelsPerFrame != 0 {
-                sampleChannels = Int32(desc.mChannelsPerFrame)
+            if desc?.mChannelsPerFrame != 0 {
+                sampleChannels = Int32((desc?.mChannelsPerFrame)!)
             }
         }
         
         /// Sanity check
-        guard (sampleRate != nil) && (sampleChannels != nil) else {
-            return 0
-        }
-        
-        reader.addOutput(trackOutput)
+        guard let rate = sampleRate, let channels = sampleChannels else { return 0 }
+//        guard (sampleRate != nil) && (sampleChannels != nil) else {
+//            return 0
+//        }
+    
+        reader.add(trackOutput)
         reader.startReading()
         
         let sampleData      = NSMutableData()
@@ -107,12 +113,12 @@ private func decodeAudio(
          and since we have two channels our number is
          max length * sample channels * sample rate
          */
-        var remainingSamples = Int32(maxLength) * sampleChannels! * sampleRate!
+        var remainingSamples = Int32(maxLength) * channels * rate
         
         /// start off chromaprint
-        chromaprint_start(context, sampleRate!, sampleChannels!)
+        chromaprint_start(context, rate, channels)
         
-        while reader.status == AVAssetReaderStatus.Reading {
+        while reader.status == AVAssetReaderStatus.reading {
             if let sampleBufferRef = trackOutput.copyNextSampleBuffer() {
                 if let blockBufferRef = CMSampleBufferGetDataBuffer(sampleBufferRef) {
                     
@@ -131,7 +137,9 @@ private func decodeAudio(
                         bufferLength,           /// number of bytes to copy
                         data!.mutableBytes)     /// destination buffer
                     
-                    let samples = UnsafeMutablePointer<Int16>(data!.mutableBytes)
+                    let opaquePtr = OpaquePointer(data!.mutableBytes)
+                    let samples = UnsafeMutablePointer<Int16>(opaquePtr)
+//                    let samples = UnsafeMutablePointer<Int16>(data!.mutableBytes)
                     
                     /**
                      *  - ctx: Chromaprint context pointer
@@ -152,9 +160,9 @@ private func decodeAudio(
                     /// pick the smaller of the two values so we don't remove too much
                     let length = min(remainingSamples, sampleCount)
                     
-                    chromaprint_feed(context, UnsafeMutablePointer<Void>(samples),length)
+                    chromaprint_feed(context, UnsafeMutableRawPointer(samples),length)
                     
-                    sampleData.appendBytes(samples, length: bufferLength)
+                    sampleData.append(samples, length: bufferLength)
                     CMSampleBufferInvalidate(sampleBufferRef)
                     
                     /// Cut short if we've set a maxLength
